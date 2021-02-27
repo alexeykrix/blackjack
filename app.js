@@ -157,7 +157,7 @@ class Bj {
         stScore < 17 && stScore < plScore ? this.getCardsStickman(): ''
         return
       }, 700)
-    } else if (stScore === plScore) this.renderModal('standoff 👉👈')
+    } else if (stScore === plScore) this.renderModal('Dead heat 👉👈')
     else if ((stScore > plScore && stScore <= 21) 
       || stScore === 21) this.renderModal('You lose 😞')
     else this.renderModal('You win 😀')
