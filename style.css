@@ -1,0 +1,226 @@
+.flip-container {
+	margin: 0px auto;
+	perspective: 800px;
+}
+
+.flip-container .card.flipped {
+	transform: rotateY(180deg);
+  animation: none;
+}
+
+.flip-container .card.wasflipped {
+  animation: none;
+}
+
+.card {
+  width: 122.5px;
+	height: 172.5px;
+	position: relative;
+	transition: .5s;
+	transform-style: preserve-3d;
+  margin:  0 5px;
+  margin-left: -80px;
+  animation: show 0.5s 1 ease;
+  transform-origin: center;
+}
+
+@keyframes show {
+  0% {
+    width: 0;
+    transform: translateX(100%)
+  }
+  100% {
+    width: 122.5px;
+    transform: translateX(0)
+  }
+}
+
+@keyframes showFlipped {
+  0% {
+    width: 0;
+    transform: translateX(100%) rotateY(180deg)
+  }
+  100% {
+    width: 122.5px;
+    transform: translateX(0) rotateY(180deg)
+  }
+}
+
+.front,
+.back {
+  border-radius: 10px;
+  box-shadow: 0 0 10px 0 #141414ad;
+  transform-origin: center;
+	display: block;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+  height: 100%;
+	backface-visibility: hidden;
+  object-fit: contain;
+}
+
+.card .front {
+	z-index: 2;
+}
+
+.back {
+	transform: rotateY(180deg);
+	z-index: 3;
+  background: url('./img/card-back.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.score {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.06rem;
+}
+
+.stickman-cards,
+.player-cards {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.front:nth-child(1) {z-index: 1}
+.front:nth-child(2) {z-index: 2}
+.front:nth-child(3) {z-index: 3}
+.front:nth-child(4) {z-index: 4}
+.front:nth-child(5) {z-index: 5}
+.front:nth-child(6) {z-index: 6}
+.front:nth-child(7) {z-index: 7}
+.front:nth-child(8) {z-index: 8}
+
+
+.d .front {
+  background: #fff  url('./img/diamonds.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.h .front {
+  background: #fff  url('./img/hearts.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.c .front {
+  background: #fff  url('./img/clubs.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.s .front {
+  background: #fff  url('./img/shapes.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+._2 .front {background-position: calc(7.7% * 0) center}
+._3 .front {background-position: calc(7.7% * 1) center}
+._4 .front {background-position: calc(7.7% * 2) center}
+._5 .front {background-position: calc(7.7% * 3) center}
+._6 .front {background-position: calc(7.7% * 4) center}
+._7 .front {background-position: calc(7.7% * 5) center}
+._8 .front {background-position: calc(7.7% * 6) center}
+._9 .front {background-position: calc(7.7% * 7) center}
+._10 .front {background-position: calc(7.7% * 8) center}
+._11 .front {background-position: calc(7.7% * 9) center}
+._12 .front {background-position: calc(7.7% * 10) center}
+._13 .front {background-position: calc(7.7% * 11) center}
+._14 .front {background-position: calc(7.7% * 12) center}
+
+body {
+  overflow: hidden;
+  font-family: Nunito, sans-serif;
+  background: #4a75c4 url('./img/bg.jpg');
+  color: #f0ebeb;
+}
+
+.controls {
+  margin: 30px auto;
+  text-align: right;
+}
+
+.controls button {
+  padding: 10px 20px;
+  background: #fafafa91;
+  color: #141414;
+  border: none;
+  border-bottom: 2px solid;
+  font-weight: 700;
+}
+button:disabled {
+  opacity:  0.5;
+}
+
+.modal-results {
+  transition: 0.5s ease;
+  position: fixed;
+  width: 250px;
+  height: 200px;
+  background: #fff;
+  border-radius: 20px;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+  box-shadow: 0 0px 10px 10px #1414143d;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  opacity: 1;
+  color: #141414;
+}
+
+.modal-results.hidden {
+  top: 100%;
+  opacity: 0;
+}
+
+.result {
+  margin-top: auto;
+}
+
+.restart {
+  padding: 10px 0;
+  border: none;
+  text-align: center;
+  width: 100%;
+  display: block;
+  font-family: Nunito, sans-serif;
+  background: #eecd3a;
+  font-weight: 700;
+  color: #141414;
+}
+
+.controls .restart {
+  width: auto;
+  display: inline-block;
+  padding: 10px 20px;
+  height: 38px;
+}
+
+table {
+  border-spacing: 0;
+  margin-bottom: auto;
+}
+td {
+  padding: 0 10px;
+  text-align: center;
+  border: 1px solid #141414;
+}
+
+td:first-child {
+  border-left: none;
+  border-top: none;
+  border-bottom: none
+}
+td:last-child {
+  border-right: none;
+  border-top: none;
+  border-bottom: none
+}
