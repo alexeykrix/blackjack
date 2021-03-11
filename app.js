@@ -73,7 +73,7 @@ class Bj {
   getStickmanScore() {
     this.score.stickman = 0
     let cardIndexes = []
-    this.cards.stickman.forEach(card => cardIndexes.push(card.index))
+    this.cards.stickman.forEach(card => card.isFlipped? '': cardIndexes.push(card.index))
     cardIndexes.sort((a, b) => a-b)
 
     cardIndexes.forEach((index, id) => {
