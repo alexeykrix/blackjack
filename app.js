@@ -3,21 +3,21 @@
 class Bj {
   constructor () {
     this.elements = {
-      stickman: document.querySelector('.stickman-cards'),
+      croupier: document.querySelector('.croupier-cards'),
       player: document.querySelector('.player-cards'),
       btnMore: document.querySelector('.more'),
       btnStop: document.querySelector('.stop'),
-      stickmanScore: document.querySelector('.stikman-score'),
+      croupierScore: document.querySelector('.stikman-score'),
       playerScore: document.querySelector('.player-score'),
       modal: document.querySelector('.modal-results'),
     }
   }
   cards = {
-    stickman: [],
+    croupier: [],
     player: [],
   }
   score = {
-    stickman: 0,
+    croupier: 0,
     player: 0,
   }
   suits = ['c', 'h', 's', 'd']
@@ -40,11 +40,11 @@ class Bj {
       <p class="result">${msg}</p>
       <table>
         <tr>
-          <td>stickman</td>
+          <td>croupier</td>
           <td>you</td>
         </tr>
         <tr>
-          <td>${this.score.stickman}</td>
+          <td>${this.score.croupier}</td>
           <td>${this.score.player}</td>
         </tr>
       </table>
@@ -70,29 +70,29 @@ class Bj {
       isFlipped: isFlipped,
     }
   }
-  getStickmanScore() {
-    this.score.stickman = 0
+  getCroupierScore() {
+    this.score.croupier = 0
     let cardIndexes = []
-    this.cards.stickman.forEach(card => card.isFlipped? '': cardIndexes.push(card.index))
+    this.cards.croupier.forEach(card => card.isFlipped? '': cardIndexes.push(card.index))
     cardIndexes.sort((a, b) => a-b)
 
     cardIndexes.forEach((index, id) => {
-      if (index < 11) this.score.stickman += index
-      else if (index < 14) this.score.stickman += 10
+      if (index < 11) this.score.croupier += index
+      else if (index < 14) this.score.croupier += 10
       else if (index === 14) {
         if (id === cardIndexes.length-1) {
-          this.score.stickman+11 > 21 
-          ? this.score.stickman += 1
-          : this.score.stickman += 11
+          this.score.croupier+11 > 21 
+          ? this.score.croupier += 1
+          : this.score.croupier += 11
         } else {
-          this.score.stickman+11 >= 21 
-            ? this.score.stickman += 1
-            : this.score.stickman += 11
+          this.score.croupier+11 >= 21 
+            ? this.score.croupier += 1
+            : this.score.croupier += 11
         }
       }
     })
     
-    this.elements.stickmanScore.innerHTML = this.score.stickman
+    this.elements.croupierScore.innerHTML = this.score.croupier
   }
   getPlayerScore() {
     this.score.player = 0
@@ -132,29 +132,29 @@ class Bj {
 
     this.getPlayerScore()
   }
-  renderStickmanCards() {
+  renderCroupierCards() {
     let elemId = []
-    this.elements.stickman.childNodes.forEach( el => elemId.push(+el.dataset.id) )
+    this.elements.croupier.childNodes.forEach( el => elemId.push(+el.dataset.id) )
 
-    this.cards.stickman.forEach(card => {
+    this.cards.croupier.forEach(card => {
       if (elemId.indexOf(card.id) === -1) {
-        this.elements.stickman.appendChild(
+        this.elements.croupier.appendChild(
           this.createCard(card, true)
         )  
       }
     })
 
-    this.getStickmanScore()
+    this.getCroupierScore()
   }
-  getCardsStickman() {
-    let stScore = this.score.stickman,
+  getCardsCroupier() {
+    let stScore = this.score.croupier,
         plScore = this.score.player
 
     if (stScore < 17 && stScore < plScore) {
-      this.cards.stickman.push(this.getRandomCard())
+      this.cards.croupier.push(this.getRandomCard())
       setTimeout(() => {
-        this.renderStickmanCards()
-        stScore < 17 && stScore < plScore ? this.getCardsStickman(): ''
+        this.renderCroupierCards()
+        stScore < 17 && stScore < plScore ? this.getCardsCroupier(): ''
         return
       }, 700)
     } else if (stScore === plScore) this.renderModal('Dead heat 👉👈')
@@ -173,16 +173,16 @@ class Bj {
     })
 
     this.elements.btnStop.addEventListener('click', () => { // stop
-      this.cards.stickman.map(card => card.isFlipped = false)
-      if (this.elements.stickman.querySelector('.flipped')) {
-        this.elements.stickman.querySelector('.flipped').classList.add('wasflipped')
-        this.elements.stickman.querySelector('.flipped').classList.remove('flipped')
+      this.cards.croupier.map(card => card.isFlipped = false)
+      if (this.elements.croupier.querySelector('.flipped')) {
+        this.elements.croupier.querySelector('.flipped').classList.add('wasflipped')
+        this.elements.croupier.querySelector('.flipped').classList.remove('flipped')
       }
 
       
       setTimeout(() => {
-        this.getStickmanScore()
-        this.getCardsStickman()
+        this.getCroupierScore()
+        this.getCardsCroupier()
       }, 500);
       this.elements.btnMore.setAttribute('disabled', true)
     })
@@ -191,27 +191,27 @@ class Bj {
       if (e.target.classList.contains('restart')) {
         this.elements.modal.classList.add('hidden')
 
-        this.cards.stickman = []
+        this.cards.croupier = []
         this.cards.player = []
 
         this.elements.player.innerHTML = ''
-        this.elements.stickman.innerHTML = ''
+        this.elements.croupier.innerHTML = ''
         
         this.elements.btnMore.removeAttribute('disabled')
         this.elements.btnStop.removeAttribute('disabled')
 
-        this.cards.stickman.push(this.getRandomCard(false), this.getRandomCard(true))
+        this.cards.croupier.push(this.getRandomCard(false), this.getRandomCard(true))
         this.cards.player.push(this.getRandomCard(), this.getRandomCard())
-        this.renderStickmanCards()
+        this.renderCroupierCards()
         this.renderPlayersCards()
       }
     })
   }
   init() {
     this.addHandlers()
-    this.cards.stickman.push(this.getRandomCard(false), this.getRandomCard(true))
+    this.cards.croupier.push(this.getRandomCard(false), this.getRandomCard(true))
     this.cards.player.push(this.getRandomCard(), this.getRandomCard())
-    this.renderStickmanCards()
+    this.renderCroupierCards()
     this.renderPlayersCards()
   }
 }
